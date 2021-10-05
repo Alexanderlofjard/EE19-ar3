@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inloggning</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="kontainer">
+        <h1 class="display-4">Formulär</h1>
+        <form class="kol2" action="madlibs.php" method="POST">
+            <label>Namn</label>
+            <input type="text" name="anamn"  required>
+          
+            <label>Kön</label>
+            <input type="kon" name="kon" required>
+
+            <label>Ålder</label>
+            <input type="alder" name="alder" required>
+
+            <label>Verb</label>
+            <input type="verb" name="verb" required>
+
+            <label>Adjektiv</label>
+            <input type="adjektiv" name="adjektiv" required>
+
+            <label>Subjektiv</label>
+            <input type="subjektiv" name="subjektiv" required>
+           
+            <button class="primary">Skicka</button>
+        </form>
+    </div>
+</body>
+</html>
