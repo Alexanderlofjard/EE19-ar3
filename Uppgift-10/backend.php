@@ -9,20 +9,10 @@
 </head>
 <body>
     <div class="kontainer">
-        <h3>Hur varmt är det?</h3>
+        <h3>Namn</h3>
+    <p></p>
 <?php
-$temp = filter_input(INPUT_POST, "temp", FILTER_SANITIZE_STRING);
-$riktning = filter_input(INPUT_POST, "riktning", FILTER_SANITIZE_STRING);
-
-echo "<p>Riktningen är $riktning</p>";
-
-//Om riktning är c till f
-if ($riktning == "cf") {
-    $farenheit = $temp * 1.8 + 32;
-    echo "<p>$temp&deg; Celsius är $farenheit&deg; Farenheit<p/>";
-} else {
-    $celsius = ($temp -32) /1.8;
-    echo "<p>$temp&deg; Farenheit är $celsius&deg; celsius <p/>";
-}
-
+$brutto = filter_input(INPUT_POST, "brutto", FILTER_SANITIZE_STRING);
+$sats = filter_input(INPUT_POST, "riktning", FILTER_SANITIZE_STRING);
+$namn
 ?>
