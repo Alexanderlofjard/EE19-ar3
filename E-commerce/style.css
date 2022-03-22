@@ -65,7 +65,7 @@ img{
     width: 100%;
 }
 .produkt img:hover{
-    width: 110%;
+    transform: scale(1.1);
 }
 
 .front-container h1{

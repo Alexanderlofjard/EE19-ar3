@@ -1,0 +1,5 @@
+max:8kanbar:bolarKarim:50
+Karim:50
+Karim:50
+Loffe:-5
+Loffe:9000000
