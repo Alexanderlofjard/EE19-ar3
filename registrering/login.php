@@ -13,23 +13,18 @@ session_start();
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <?php
-    if ($_SESSION['inloggad'] == true) {
-        echo "<p class=\"alert alert-success\">Du är inloggad</p>";
-    }
-    ?>
     <div class="kontainer">
         <h1>Bloggen</h1>
         <nav>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./registrera.php">Registrera</a>
+                    <a class="nav-link" aria-current="page" href="./registrera.php">Registrera</a>
                 </li>
                 <?php
-                if ($_SESSION['inloggad'] == false){
+                if($_SESSION['inloggad'] == false){
                 ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="./login.php">Logga in</a>
+                    <a class="nav-link active" href="./login.php">Logga in</a>
                 </li>
                 <?php
                 }
@@ -37,17 +32,12 @@ session_start();
                 <li class="nav-item">
                     <a class="nav-link" href="./logout.php">Logga ut</a>
                 </li>
-            </ul>
+                <?php
+                
+                ?>
         </nav>
         <main>
-            <form action="registrera.php" method="post">
-                <h3>Registrera användare</h3>
-                <div class="row mb-3">
-                    <label for="inputNamn" class="col-sm-2 col-form-label">Namn</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputNamn" name="namn">
-                    </div>
-                </div>
+            <form action="login.php" method="post">
 
                 <div class="row mb-3">
                     <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
@@ -63,12 +53,11 @@ session_start();
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Sign in</button>
+                <button type="submit" class="btn btn-primary">Logga in</button>
             </form>
         </main>
         <?php
         // Ta emot data från formuläret
-        $namn = filter_input(INPUT_POST, "namn");
         $email = filter_input(INPUT_POST, "email");
         $lösenord = filter_input(INPUT_POST, "lösenord");
 
@@ -76,35 +65,34 @@ session_start();
         //var_dump($namn, $email, $lösenord);
 
         // Kolla att det inte är null
-        if ($namn && $email && $lösenord) {
+        if ($email && $lösenord) {
 
             //Kolla att användarnamnet eller email inte redan används
-            $sql = "SELECT * FROM register WHERE namn = '$namn' OR epost = '$email'";
+            $sql = "SELECT * FROM register WHERE epost = '$email'";
 
             // 2. Kör SQL-kommandot
             $resultat = $conn->query($sql);
 
-            // Hittar vi samma användarnamnet eller email?
-
-            if ($resultat->num_rows > 0) {
-                echo "<p class=\"alert alert-warning\">Användarnamn eller email används redan, var god försök igen.</p>";
+            // Gick det bra att köra SQL satsen?
+            if (!$resultat) {
+                die("Det blev fel med SQL-satsen");
             } else {
-                $hash = password_hash($lösenord, PASSWORD_DEFAULT);
+                
+                // Plocka ut svaret och lägg det i arrayen $rad[]
+                $rad = $resultat->fetch_assoc();
 
-                // Lagra i databasen
-                // 1. SQL-kommandot
-                $sql = "INSERT INTO register (namn, epost, hash) VALUES ( '$namn', '$email','$hash' ) ";
+                // Kolla om lösendordet och hashen matchar
+                if (password_verify($lösenord, $rad["hash"])) {
+                    echo "<p class=\"alert alert-success\">Du är inloggad</p>";
 
-                // 2. Kör SQL-kommandot
-                $resultat = $conn->query($sql);
-
-                // 3. Funkade kommandot?
-                if (!$resultat) {
-                    die("<p class=\"alert alert-warning\" >Någonting blev fel med registrering</p>");
+                    // Kom ihåg att vi lyckats logga in
+                    $_SESSION['inloggad'] = true;
                 } else {
-                    echo "<p class=\"alert alert-success\">Användaren $namn är registrerad</p>";
+                    echo "<p class=\"alert alert-warning\">Epost eller lösenord stämmer inte</p>";
                 }
+                
             }
+            
         }
         ?>
     </div>

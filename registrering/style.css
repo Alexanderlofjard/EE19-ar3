@@ -1,3 +1,14 @@
+body {
+background: #e0e0e0;
+}
+
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+}
+
+
 .kontainer {
     width: 800px;
     padding: 1rem;
@@ -14,3 +25,4 @@ form {
     
 
 }
+
