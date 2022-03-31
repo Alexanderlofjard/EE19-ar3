@@ -1,0 +1,107 @@
+/* Mixin's */
+body {
+  background: #82d2e5;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  height: 100%;
+  color: #fff;
+  text-align: center;
+}
+h1, h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 2.6em;
+  text-transform: uppercase;
+}
+h3 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 1.4em;
+  text-transform: uppercase;
+}
+#seconds, #tens {
+  font-size: 2em;
+}
+button {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -khtml-border-radius: 5px;
+  background: #82d2e5;
+  color: #fff;
+  border: solid 1px #fff;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  padding: 18px 10px;
+  width: 180px;
+  margin: 10px;
+  outline: none;
+}
+button:hover {
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  background: #fff;
+  border: solid 1px #fff;
+  color: #82d2e5;
+}
+#container {
+  width: 630px;
+  margin: 10px auto;
+}
+#container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+[data-view="card"] {
+  transform: rotateY(180deg);
+  width: 100px;
+  height: 140px;
+  border: solid 1px #d3cece;
+  border-radius: 5px;
+  float: left;
+  margin: 10px;
+  cursor: pointer;
+  background: #fff;
+}
+.flipped {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+  transform: rotateY(0deg);
+}
+.reverse {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+  transform: rotateY(180deg);
+}
+.correct {
+  opacity: 0.5;
+  cursor: default;
+  transform-style: preserve-3d;
+  position: relative;
+  transform: rotateY(0deg);
+}
+/* Icons */
+.correct[data-item="falafel"], .flipped[data-item="hamburger"] {
+  background: url("https://i.ibb.co/w0VGPK1/8305062-0.jpg") left center no-repeat #fff;
+  background-size: contain;
+}
+.correct[data-item="pizza"], .flipped[data-item="hotdog"] {
+  background: url("https://i.ibb.co/qy2qRTG/burned-pizza-bad-cooking-cheese-84649109.jpg") left center no-repeat #fff;
+  background-size: contain;
+}
+.correct[data-item="burger"], .flipped[data-item="icecream"] {
+  background: url("https://i.ibb.co/vvxPZY7/istockphoto-509613854-612x612.jpg") left center no-repeat #fff;
+  background-size: contain;
+}
+.correct[data-item="korv"], .flipped[data-item="snus"] {
+  background: url("https://i.ibb.co/qxD25Td/1-14533-hot-dog-clipart-transparent-background-dancing-hot-dog.jpg") left center no-repeat #fff;
+  background-size: contain;
+}
+.correct[data-item="loffe"], .flipped[data-item="loffe"] {
+  background: url("https://i.ibb.co/m9mbrTr/60f0ae4a3b97f.png") left center no-repeat #fff;
+  background-size: contain;
+}

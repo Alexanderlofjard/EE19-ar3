@@ -6,6 +6,10 @@ session_start();
 if (!isset($_SESSION['inloggad'])) {
     $_SESSION['inloggad'] = false;
 }
+if ($_SESSION['inloggad'] == false) {
+    header("Location: login.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +31,6 @@ if (!isset($_SESSION['inloggad'])) {
     ?>
     <div class="kontainer">
         <h1>Bloggen</h1>
-
         <nav>
             <ul class="nav nav-tabs">
 
@@ -35,7 +38,7 @@ if (!isset($_SESSION['inloggad'])) {
                 if ($_SESSION['inloggad'] == false) {
                 ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="./login.php">Logga in</a>
+                        <a class="nav-link active" href="./login.php">Logga in</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="./registrera.php">Registrera</a>
@@ -44,10 +47,10 @@ if (!isset($_SESSION['inloggad'])) {
                 } else {
                 ?>
                     <li class="nav-item">
-                        <a class="nav-link active" href="./logout.php">Logga ut</a>
+                        <a class="nav-link" href="./logout.php">Logga ut</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./admin.php">Admin</a>
+                        <a class="nav-link active" href="./admin.php">Admin</a>
                     </li>
                 <?php
                 }
@@ -55,13 +58,42 @@ if (!isset($_SESSION['inloggad'])) {
             </ul>
         </nav>
         <main>
+            <h3>Admin</h3>
             <?php
-            $_SESSION['inloggad'] = false;
+            // Steg 1: SQL-satsen
+            $sql = "SELECT * FROM register";
 
-            header("Location: login.php");
-            ?>
+            // Steg 2: Kör SQL-sats
+            $resultat = $conn->query($sql);
+
+            // Steg 3: Kolla så att det funkade
+            if (!$resultat) {
+                die("Det blev fel med SQL-satsen");
+            } else {
+              // Steg 4: plocka ut svaren, dvs alla rader
+                echo "<table class=\"table\">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Namn</th>
+                        <th>Epost</th>
+                    </tr>
+                </thead>
+                <tbody>";
+               while ($rad = $resultat->fetch_assoc()) {
+                   echo "<tr>
+                   <td>$rad[id]</td> 
+                   <td>$rad[namn]</td>
+                   <td> $rad[epost]</td>
+                   </tr>";
+               }
+               echo "</tbody>
+               </table>";
+
+                // Steg 5: Gå igenom raderna
+            }
+           ?>
         </main>
-
     </div>
 </body>
 </html>

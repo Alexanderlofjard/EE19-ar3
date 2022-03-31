@@ -1,6 +1,11 @@
 <?php
 include "konfigdb.php";
 session_start();
+
+// Om det inte finns en session betyder det att man inte är inloggad
+if (!isset($_SESSION['inloggad'])) {
+    $_SESSION['inloggad'] = false;
+}
 ?>
 
 <!DOCTYPE html>
@@ -15,28 +20,37 @@ session_start();
 <body>
     <?php
     if ($_SESSION['inloggad'] == true) {
-        echo "<p class=\"alert alert-success\">Du är inloggad</p>";
+        echo "<p>Du är inloggad</p>";
+    } else {
+        echo "<p>Du är utloggad</p>";
     }
     ?>
     <div class="kontainer">
         <h1>Bloggen</h1>
         <nav>
             <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./registrera.php">Registrera</a>
-                </li>
+
                 <?php
-                if ($_SESSION['inloggad'] == false){
+                if ($_SESSION['inloggad'] == false) {
                 ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="./login.php">Logga in</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./login.php">Logga in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./registrera.php">Registrera</a>
+                    </li>
+                <?php
+                } else {
+                ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./logout.php">Logga ut</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./logout.php">Admin</a>
+                    </li>
                 <?php
                 }
                 ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="./logout.php">Logga ut</a>
-                </li>
             </ul>
         </nav>
         <main>
