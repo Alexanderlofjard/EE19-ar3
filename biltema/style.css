@@ -1,0 +1,16 @@
+.kontainer {
+    padding: 4em;
+    background: #f6f6f6;
+    margin: auto;
+}
+form {
+    margin: 2em 0;
+    padding: 1em;
+}
+button {
+    margin-top: 2em;
+}
+pre {
+    background-color: lightblue;
+    padding: 1em;
+}
